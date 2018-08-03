@@ -314,6 +314,7 @@ class Window(Frame):
         GBA_ROM_Size.add_command(label='64mbit',command=main_GBA_Dump_64)
         GBA_ROM_Size.add_command(label='128mbit',command=main_GBA_Dump_128)
         GBA_ROM_Size.add_command(label='256mbit',command=main_GBA_Dump_256)
+        GBA_ROM_Size.add_command(label='2048M' ,command=main_GBA_Dump_2048)
         GBA_BV=Menu(menu)
         cartTypeMenu.add_cascade(label="GBA BennVenn128M",menu=GBA_BV)
         GBA_BV.add_command(label='Flash ROM',command=main_GBA_Flash_ROM)
@@ -1340,6 +1341,10 @@ def main_GBA_Dump_128():
 def main_GBA_Dump_256():
     global ROMsize
     ROMsize=1048576*32
+    main_GBA_Dump()
+def main_GBA_Dump_2048():
+    global ROMsize
+    ROMsize=1048576*256
     main_GBA_Dump()
 
 def main_GBA_GetByte(Address):
