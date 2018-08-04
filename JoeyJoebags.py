@@ -37,7 +37,7 @@ class Window(Frame):
     def init_window(self):
 
     
-        self.master.title("Joey Joebags by BennVenn - V3.35")
+        self.master.title("Joey Joebags by BennVenn - V3.36 - Custom")
         self.pack(fill=BOTH, expand=1)
 
         self.lowerLeftLabel = StringVar()
