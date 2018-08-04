@@ -1487,6 +1487,19 @@ def main_GBA_Read_CFI():
         return(1)
     else:
         return(0)
+		
+def main_GBA_Read_CFI32M():
+    dev.write(1, [49, 1, 0, 10, 170, 152, 152])
+    ROMbuffer = dev.read(129, 64)
+    dev.write(1, [48, 0, 0, 0, 32])
+    ROMbuffer = dev.read(129, 64)
+    if ROMbuffer[0] == 82 and ROMbuffer[4] == 81 and ROMbuffer[8] == 90:
+        print('CFI Present')
+        dev.write(1, [49, 1, 0, 0, 0, 240, 240])
+        buffer = dev.read(129, 64)
+        return 1
+    else:
+        return 0
 
 def main_GBA_Testcode():
     dev.write(0x01,[0x30,0x00,0x00,0x00,0x00])
@@ -2172,7 +2185,7 @@ def main_GBA_Sector_Erase_32M(Sector):
 
 
 def main_GBA_Flash_ROM_32M():
-    if main_GBA_Read_CFIPPP() == 1:
+    if main_GBA_Read_CFI32M() == 1:
         main_LoadROMGBA()
         Hi2 = 0
         secta = int(ROMsize / 65536) + 1
@@ -2425,6 +2438,7 @@ if dev is None:
     exit()
 if dev is not None:
     dev.set_configuration()
+    messagebox.showinfo("Welcome","Gen3 is a work in progress, please report any bugs or requests to Bennvenn@hotmail.com")
     main_CheckVersion()
 
 
