@@ -318,6 +318,9 @@ class Window(Frame):
         GBA_BV=Menu(menu)
         cartTypeMenu.add_cascade(label="GBA BennVenn128M",menu=GBA_BV)
         GBA_BV.add_command(label='Flash ROM',command=main_GBA_Flash_ROM)
+		GBA_PP = Menu(menu)
+        cartTypeMenu.add_cascade(label='GBA 32MB clone carts', menu=GBA_32M)
+        GBA_32M.add_command(label='Flash ROM', command=main_GBA_Flash_ROM_32M)
         #GBA_BV.add_command(label='Testcode',command=main_GBA_Testcode)
         GBA_DD=Menu(menu)
         cartTypeMenu.add_cascade(label="GBA 4400 clone cart",menu=GBA_DD)
@@ -2150,6 +2153,52 @@ def main_GBA_Flash_ROM_DD():
         messagebox.showinfo('Operation Complete','Writing Complete.')
         dev.write(0x01,[0x31,0x01,0x00,0x000,0x00,0x00,0xFF])
         ROMbuffer= dev.read(0x81,64)
+        main_GBA_ReadHeader()
+		
+def main_GBA_Sector_Erase_32M(Sector):
+    Shi = Sector >> 1
+    Slo = Sector << 7
+    Shi = Shi & 255
+    Slo = Slo & 255
+    dev.write(1, [49, 6, 0, 10, 170, 170, 169, 0, 5, 85, 85, 86, 0, 10, 170, 128, 128, 0, 10, 170, 170, 169, 0, 5, 85, 85, 86, Shi, Slo, 0, 48, 48])
+    ROMbuffer = dev.read(129, 64)
+    dev.write(1, [51])
+    IFB = dev.read(129, 64)
+    while IFB[0] == 1:
+        dev.write(1, [51])
+        IFB = dev.read(129, 64)
+
+    print((Sector + 1) * 65536, 'Bytes Erased')
+
+
+def main_GBA_Flash_ROM_32M():
+    if main_GBA_Read_CFIPPP() == 1:
+        main_LoadROMGBA()
+        Hi2 = 0
+        secta = int(ROMsize / 65536) + 1
+        for sectors in range(0, secta):
+            main_GBA_Sector_Erase_32M(sectors)
+
+        for ROMaddress in range(0, ROMsize, 32):
+            Address = int(ROMaddress / 2)
+            Lo = Address & 255
+            Me = (Address & 65280) >> 8
+            Hi = (Address & 16711680) >> 16
+            Data32Bytes = ROMbuffer[ROMaddress:ROMaddress + 32]
+            Hi = Hi.to_bytes(1, 'little')
+            Me = Me.to_bytes(1, 'little')
+            Lo = Lo.to_bytes(1, 'little')
+            FlashWriteCommand = b'?' + Hi + Me + Lo + b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+            USBoutputPacket = FlashWriteCommand + Data32Bytes
+            dev.write(1, USBoutputPacket)
+            response = dev.read(129, 64)
+            if Hi2 != Hi:
+                print(ROMaddress, ' bytes of ', ROMsize, 'Written...')
+                Hi2 = Hi
+                continue
+
+        print(ROMsize, ' Written!')
+        messagebox.showinfo('Operation Complete', 'Writing Complete.')
         main_GBA_ReadHeader()
 
 
