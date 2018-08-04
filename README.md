@@ -12,7 +12,7 @@ Custom version of the Joeybags software.
 # Compiling/Decompiling Windows Binaries
 
 ### Compiling
-Run ```python -m py2exe JoeyJoebags***.py``` and windows binaries will be compiled.
+Run ```python -m py2exe JoeyJoebags.py``` to compile windows binaries
 
 ### Requirements
 ```
