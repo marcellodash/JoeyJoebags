@@ -1,9 +1,3 @@
-# uncompyle6 version 2.11.5
-# Python bytecode 3.4 (3310)
-# Decompiled from: Python 3.4.4 (v3.4.4:737efcadf5a6, Dec 20 2015, 20:20:57) [MSC v.1600 64 bit (AMD64)]
-# Embedded file name: JoeyJoebags.py
-# Compiled at: 2018-08-04 03:05:06
-# Size of source mod 2**32: 2292 bytes
 from tkinter import *
 from tkinter.filedialog import askopenfilename, asksaveasfilename
 from tkinter.simpledialog import *
