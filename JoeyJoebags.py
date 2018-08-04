@@ -1234,7 +1234,7 @@ def main_JPN_Burn_ROM():
                 break
         if addold != address >> 13:
             Percentage = address/ROMsize*100
-            print (address,"bytes of",ROMsize, "|", "%.2f" % Percentage+"%")
+            print (address,"bytes of",ROMsize, "|", "%.2f" % Percentage+"%", end='\r')
         addold=address >> 13
         
             
@@ -1413,7 +1413,8 @@ def main_GBA_Dump():
             ROMbuffer= dev.read(0x81,64)
             ROMfile.write(ROMbuffer)
             if Hi2 != Hi:
-                print(str(Address*2)+' Bytes of '+str(ROMsize))
+                Percentage = Address*2/ROMsize*100
+                print(str(Address*2)+' Bytes of '+str(ROMsize), "|", "%.2f" % Percentage+"%", end='\r')
             Hi2=Hi
         ROMfile.close()
         print ('Done!')
@@ -1467,7 +1468,8 @@ def main_GBA_Flash_ROM():
             dev.write(0x01,USBoutputPacket)
             response=dev.read(0x81,64)
             if Hi2 != Hi:
-                print (ROMaddress,' bytes of ',ROMsize ,'Written...')
+                Percentage = ROMaddress/ROMsize*100
+                print (ROMaddress,' bytes of ',ROMsize ,'Written...', "|", "%.2f" % Percentage+"%", end='\r')
                 Hi2=Hi
         print (ROMsize,' Written!')
         messagebox.showinfo('Operation Complete','Writing Complete.')
@@ -2162,7 +2164,8 @@ def main_GBA_Flash_ROM_DD():
             dev.write(0x01,USBoutputPacket)
             response=dev.read(0x81,64)
             if Hi2 != Hi:
-                print (ROMaddress,' bytes of ',ROMsize ,'Written...')
+                Percentage = ROMaddress/ROMsize*100
+                print (ROMaddress,' bytes of ',ROMsize ,'Written...', "|", "%.2f" % Percentage+"%", end='\r')
                 Hi2=Hi
         print (ROMsize,' Written!')
         messagebox.showinfo('Operation Complete','Writing Complete.')
@@ -2208,7 +2211,8 @@ def main_GBA_Flash_ROM_32M():
             dev.write(1, USBoutputPacket)
             response = dev.read(129, 64)
             if Hi2 != Hi:
-                print(ROMaddress, ' bytes of ', ROMsize, 'Written...')
+                Percentage = ROMaddress/ROMsize*100
+                print (ROMaddress,' bytes of ',ROMsize ,'Written...', "|", "%.2f" % Percentage+"%", end='\r')
                 Hi2 = Hi
                 continue
 
