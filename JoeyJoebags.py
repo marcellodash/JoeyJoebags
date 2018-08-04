@@ -1233,7 +1233,8 @@ def main_JPN_Burn_ROM():
                 print ("Failed writing to sector",address)
                 break
         if addold != address >> 13:
-            print (address,"bytes of",ROMsize)
+            Percentage = address/ROMsize*100
+            print (address,"bytes of",ROMsize, "|", "%.2f" % Percentage+"%")
         addold=address >> 13
         
             
@@ -1307,6 +1308,7 @@ def main_GBA_ReadHeader():
     app.MAPPERtypeLabel.set("GBA Cart: No Mapper")
 
     fsize=256
+	
     if main_GBA_GetByte(0x800000)== (0,0,0,0,0,0,0,0):
         fsize=128
     if main_GBA_GetByte(0x400000)== (0,0,0,0,0,0,0,0):
