@@ -216,24 +216,6 @@ class Window(Frame):
         cartTypeMenu.add_cascade(label="Catskull 32k",menu=CatMenu)
         CatMenu.add_command(label='Erase',command=main_Catskull_erase)
         CatMenu.add_command(label='Flash',command=main_Catskull_write)
-        
-
-#Bung32 Cart Menu
-        Bung32menu = Menu(menu)
-        cartTypeMenu.add_cascade(label="Bung 32M",menu=Bung32menu,state=DISABLED)
-        Bung32menu.add_command(label='Get Save RAM')
-        Bung32menu.add_command(label='Write Save RAM')
-        Bung32menu.add_command(label='Dump ROM')
-        Bung32menu.add_command(label='Flash ROM')
-
-#Bung64 Cart Menu
-        Bung64menu = Menu(menu)
-        cartTypeMenu.add_cascade(label="Bung 64M",menu=Bung64menu,state=DISABLED)
-        Bung64menu.add_command(label='Get Save RAM')
-        Bung64menu.add_command(label='Write Save RAM')
-        Bung64menu.add_command(label='Dump ROM')
-        Bung64menu.add_command(label='Flash ROM')
-
 
 
 #DMG-MMSA-JPN Cart Menu
