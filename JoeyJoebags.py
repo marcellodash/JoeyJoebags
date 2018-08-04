@@ -1349,7 +1349,7 @@ def main_GBA_Dump_256():
     main_GBA_Dump()
 def main_GBA_Dump_2048():
     global ROMsize
-    ROMsize=1048576*2048
+    ROMsize=1048576*256
     main_GBA_Dump()
 
 def main_GBA_GetByte(Address):

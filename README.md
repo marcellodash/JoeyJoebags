@@ -22,3 +22,9 @@ py2exe
 
 ### Compiling
 Run ```python -m py2exe JoeyJoebags***.py``` and windows binaries will be compiled.
+
+
+### Decompiling
+To decompile the binary you will need python_exe_unpack.py from https://github.com/countercept/python-exe-unpacker just follow the instructions in the readme, to decompile the exe use ```python python_exe_unpack.py -i JoeyJoebags.exe```
+
+If you experience any issues with installing PyCrypto for the decompiler, install this https://github.com/axper/python3-pycrypto-windows-installer
