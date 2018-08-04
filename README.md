@@ -7,7 +7,6 @@ Custom version of the Joeybags software.
 - Allow dumping of 2048M Roms for dumping 369 In 1 carts
 - Dumping / Flashing completion percentage
 - Progress is now shown on a single line
-- 
 
 
 # Compiling Windows Binaries
