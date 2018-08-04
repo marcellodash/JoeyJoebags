@@ -318,7 +318,7 @@ class Window(Frame):
         GBA_BV=Menu(menu)
         cartTypeMenu.add_cascade(label="GBA BennVenn128M",menu=GBA_BV)
         GBA_BV.add_command(label='Flash ROM',command=main_GBA_Flash_ROM)
-		GBA_PP = Menu(menu)
+        GBA_PP = Menu(menu)
         cartTypeMenu.add_cascade(label='GBA 32MB clone carts', menu=GBA_32M)
         GBA_32M.add_command(label='Flash ROM', command=main_GBA_Flash_ROM_32M)
         #GBA_BV.add_command(label='Testcode',command=main_GBA_Testcode)
