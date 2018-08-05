@@ -4,7 +4,6 @@ Custom version of the Joeybags software.
 
 ## Current Additions
 - Fixes dumping 32MB repros like the DV15 & PPP08
-- Allow dumping of 2048M Roms for dumping 369 In 1 carts
 - Dumping / Flashing completion percentage
 - Progress is now shown on a single line
 
