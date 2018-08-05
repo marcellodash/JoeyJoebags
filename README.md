@@ -6,6 +6,7 @@ Custom version of the Joey software.
 - Fixes dumping 32MB repros like the DV15 & PPP08
 - Dumping / Flashing completion percentage
 - Progress is now shown on a single line
+- Removed dotted lines at the top of all menu entries
 
 
 # Compiling/Decompiling Windows Binaries

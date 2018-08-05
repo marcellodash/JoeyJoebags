@@ -60,36 +60,36 @@ class Window(Frame):
         MAPPERtypeLabel = Label(root,  textvariable = self.MAPPERtypeLabel)
         MAPPERtypeLabel.place(x=0,y=60)
 
-        menu=Menu(root)
+        menu=Menu(root, tearoff=False)
         root.config(menu=menu)
-        filemenu=Menu(menu)
+        filemenu=Menu(menu, tearoff=False)
         menu.add_cascade(label="File",menu=filemenu)
         filemenu.add_command(label="Exit",command=main_Exit)
-        cartTypeMenu = Menu(menu)
+        cartTypeMenu = Menu(menu, tearoff=False)
         menu.add_cascade(label="Cart Type", menu=cartTypeMenu)
 #MBC Generic Cart Menu
-        MBCmenu = Menu(menu)
+        MBCmenu = Menu(menu, tearoff=False)
         cartTypeMenu.add_cascade(label="GB(C) Generic",menu=MBCmenu)
         MBCmenu.add_command(label='Get Save RAM',command=main_MBC_Dump_RAM)
         MBCmenu.add_command(label='Write Save RAM',command=main_MBC_Burn_RAM)
         MBCmenu.add_command(label='Dump ROM',command=main_MBC_Dump_ROM)
 
 #MBC2 Menu
-        MBC2menu = Menu(menu)
+        MBC2menu = Menu(menu, tearoff=False)
         cartTypeMenu.add_cascade(label="GB MBC2",menu=MBC2menu)
         MBC2menu.add_command(label='Get Save RAM',command=main_MBC2_Dump_RAM)
         MBC2menu.add_command(label='Write Save RAM',command=main_MBC2_Burn_RAM)
         MBC2menu.add_command(label='Dump ROM',command=main_MBC_Dump_ROM)
 
 #GB Cam Cart Menu
-        GBCammenu = Menu(menu)
+        GBCammenu = Menu(menu, tearoff=False)
         cartTypeMenu.add_cascade(label="GB Camera",menu=GBCammenu)
         GBCammenu.add_command(label='Get Save RAM',command=main_Cam_Dump_RAM)
         GBCammenu.add_command(label='Write Save RAM',command=main_Cam_Burn_RAM)
         
         
 #EMS32 Cart Menu
-        EMS32menu = Menu(menu)
+        EMS32menu = Menu(menu, tearoff=False)
         cartTypeMenu.add_cascade(label="EMS32",menu=EMS32menu)
         EMS32menu.add_command(label='Get Save RAM',command=main_MBC_Dump_256RAM)
                               
@@ -98,7 +98,7 @@ class Window(Frame):
         EMS32menu.add_command(label='Flash ROM',command=main_EMS64_Burn_ROM)
 
 #EMS64 Cart Menu
-        EMS64menu = Menu(menu)
+        EMS64menu = Menu(menu, tearoff=False)
         cartTypeMenu.add_cascade(label="EMS64",menu=EMS64menu)
         EMS64menu.add_command(label='Get Save RAM',command=main_MBC_Dump_256RAM)
         EMS64menu.add_command(label='Write Save RAM',command=main_MBC_Burn_RAM)
@@ -107,9 +107,9 @@ class Window(Frame):
         EMS64menu.add_command(label='Set page 2',command=main_EMS64_PageSwap)
         
 #BV64 Cart Menu
-        BV64menu = Menu(menu)
-        BV64GSR = Menu(menu)
-        BV64WSR = Menu(menu)
+        BV64menu = Menu(menu, tearoff=False)
+        BV64GSR = Menu(menu, tearoff=False)
+        BV64WSR = Menu(menu, tearoff=False)
         cartTypeMenu.add_cascade(label="BennVenn 64M",menu=BV64menu)
         BV64menu.add_cascade(label='Get Save RAM',menu=BV64GSR)
         BV64GSR.add_command(label='128K',command=main_BV64_Dump_128K0)
@@ -127,20 +127,20 @@ class Window(Frame):
         BV64menu.add_command(label='Flash ROM',command=main_BV64_Flash_ROM0)
         
 #BV256 Cart Menu
-        BV256menu = Menu(menu)
-        BV256B1 = Menu(menu)
-        BV256B2 = Menu(menu)
-        BV256B3 = Menu(menu)
-        BV256B4 = Menu(menu)
+        BV256menu = Menu(menu, tearoff=False)
+        BV256B1 = Menu(menu, tearoff=False)
+        BV256B2 = Menu(menu, tearoff=False)
+        BV256B3 = Menu(menu, tearoff=False)
+        BV256B4 = Menu(menu, tearoff=False)
         
-        BV1256GSR = Menu(menu)
-        BV1256WSR = Menu(menu)
-        BV2256GSR = Menu(menu)
-        BV2256WSR = Menu(menu)
-        BV3256GSR = Menu(menu)
-        BV3256WSR = Menu(menu)
-        BV4256GSR = Menu(menu)
-        BV4256WSR = Menu(menu)
+        BV1256GSR = Menu(menu, tearoff=False)
+        BV1256WSR = Menu(menu, tearoff=False)
+        BV2256GSR = Menu(menu, tearoff=False)
+        BV2256WSR = Menu(menu, tearoff=False)
+        BV3256GSR = Menu(menu, tearoff=False)
+        BV3256WSR = Menu(menu, tearoff=False)
+        BV4256GSR = Menu(menu, tearoff=False)
+        BV4256WSR = Menu(menu, tearoff=False)
         cartTypeMenu.add_cascade(label="BennVenn 256M",menu=BV256menu)
         BV256menu.add_cascade(label="Block1",menu=BV256B1)
         BV256menu.add_cascade(label="Block2",menu=BV256B2)
@@ -212,14 +212,14 @@ class Window(Frame):
         BV256B4.add_command(label='Flash ROM',command=main_BV64_Flash_ROM3)
 
 #32k cart menu
-        CatMenu = Menu(menu)
+        CatMenu = Menu(menu, tearoff=False)
         cartTypeMenu.add_cascade(label="Catskull 32k",menu=CatMenu)
         CatMenu.add_command(label='Erase',command=main_Catskull_erase)
         CatMenu.add_command(label='Flash',command=main_Catskull_write)
 
 
 #DMG-MMSA-JPN Cart Menu
-        JPNmenu = Menu(menu)
+        JPNmenu = Menu(menu, tearoff=False)
         cartTypeMenu.add_cascade(label="DMG-MMSA-JPN",menu=JPNmenu)
         JPNmenu.add_command(label='Get Save RAM',command=main_MBC_Dump_RAM)
         JPNmenu.add_command(label='Write Save RAM',command=main_MBC_Burn_RAM)
@@ -229,7 +229,7 @@ class Window(Frame):
 
 
 #Shark MX Cart Menu
-        MXmenu = Menu(menu)
+        MXmenu = Menu(menu, tearoff=False)
         cartTypeMenu.add_cascade(label="Shark MX",menu=MXmenu)
         MXmenu.add_command(label='Get Save RAM',command=main_MBC_Dump_RAM)
         MXmenu.add_command(label='Write Save RAM',command=main_MBC_Burn_RAM)
@@ -237,7 +237,7 @@ class Window(Frame):
         MXmenu.add_command(label='Flash ROM',command=main_MX_Burn_ROM,)
 
 #El Cheapo Cart Menu
-        ELmenu = Menu(menu)
+        ELmenu = Menu(menu, tearoff=False)
         cartTypeMenu.add_cascade(label="El-Cheapo",menu=ELmenu)
         ELmenu.add_command(label='Erase',command=main_ELCheapo_Erase)
         ELmenu.add_command(label='Flash ROM',command=main_ELCheapo_Write)
@@ -246,14 +246,14 @@ class Window(Frame):
 
 
 #El Cheapo SD Cart Menu
-        ELmenuSD = Menu(menu)
+        ELmenuSD = Menu(menu, tearoff=False)
         cartTypeMenu.add_cascade(label="El-Cheapo SD",menu=ELmenuSD)
         ELmenuSD.add_command(label='Erase',command=main_ELCheapoSD_Erase)
         ELmenuSD.add_command(label='Flash ROM',command=main_ELCheapoSD_Write)
         cartTypeMenu.add_separator()
 
 #BV5 Cheapo Cart Menu
-        BV5menu = Menu(menu)
+        BV5menu = Menu(menu, tearoff=False)
         cartTypeMenu.add_cascade(label="Chinese BV5 Clone Cart",menu=BV5menu)
         BV5menu.add_command(label='Erase',command=main_BV5_Erase)
         BV5menu.add_command(label='Flash ROM',command=main_BV5_Write)
@@ -262,7 +262,7 @@ class Window(Frame):
         cartTypeMenu.add_separator()
 
 #Debug Testing
-        TESTmenu = Menu(menu)
+        TESTmenu = Menu(menu, tearoff=False)
         cartTypeMenu.add_cascade(label="Debug Mode Testing - Will erase your cart!",menu=TESTmenu)
         TESTmenu.add_command(label='Test1',command=Test1)
         TESTmenu.add_command(label='Test2',command=Test2)
@@ -270,9 +270,9 @@ class Window(Frame):
 
 
 #GBA stuff
-        GBA_GenericMenu=Menu(menu)
-        GBA_ROM_Size=Menu(menu)
-        GBA_ROM_Burn=Menu(menu)
+        GBA_GenericMenu=Menu(menu, tearoff=False)
+        GBA_ROM_Size=Menu(menu, tearoff=False)
+        GBA_ROM_Burn=Menu(menu, tearoff=False)
         cartTypeMenu.add_cascade(label="GBA Generic",menu=GBA_GenericMenu)
         GBA_GenericMenu.add_command(label='Read Header',command=main_GBA_ReadHeader)
         GBA_GenericMenu.add_separator()
@@ -296,24 +296,23 @@ class Window(Frame):
         GBA_ROM_Size.add_command(label='64mbit',command=main_GBA_Dump_64)
         GBA_ROM_Size.add_command(label='128mbit',command=main_GBA_Dump_128)
         GBA_ROM_Size.add_command(label='256mbit',command=main_GBA_Dump_256)
-        GBA_BV=Menu(menu)
+        GBA_BV=Menu(menu, tearoff=False)
         cartTypeMenu.add_cascade(label="GBA BennVenn128M",menu=GBA_BV)
         GBA_BV.add_command(label='Flash ROM',command=main_GBA_Flash_ROM)
-        GBA_32M = Menu(menu)
+        GBA_32M = Menu(menu, tearoff=False)
         cartTypeMenu.add_cascade(label='GBA 32MB clone carts', menu=GBA_32M)
         GBA_32M.add_command(label='Flash ROM', command=main_GBA_Flash_ROM_32M)
         #GBA_BV.add_command(label='Testcode',command=main_GBA_Testcode)
-        GBA_DD=Menu(menu)
+        GBA_DD=Menu(menu, tearoff=False)
         cartTypeMenu.add_cascade(label="GBA 4400 clone cart",menu=GBA_DD)
         GBA_DD.add_command(label='Flash ROM',command=main_GBA_Flash_ROM_DD)
         
 
-        functionMenu = Menu(menu)
+        functionMenu = Menu(menu, tearoff=False)
         menu.add_cascade(label="Function", menu=functionMenu)
         functionMenu.add_command(label="Read Cart Header",command=main_readCartHeader)
-        functionMenu.add_separator()
 
-        joeyMenu = Menu(menu)
+        joeyMenu = Menu(menu, tearoff=False)
         menu.add_cascade(label="Joey", menu=joeyMenu)
         joeyMenu.add_command(label="Enter Update Key",command=main_SendKey)
         joeyMenu.add_command(label="Update Firmware",command=main_updateFirmware)
@@ -321,7 +320,6 @@ class Window(Frame):
         
 
 
-        joeyMenu.add_separator()
 
         self.lowerRightLabel.set('Hardware Not Detected')
         self.ROMtitleLabel.set("ROM Title: Unknown")
