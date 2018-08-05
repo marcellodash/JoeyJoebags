@@ -1,5 +1,5 @@
 # JoeyJoebags
-Custom version of the Joeybags software.
+Custom version of the Joey software.
 
 
 ## Current Additions
