@@ -1738,56 +1738,38 @@ def main_GBA_Write64kFLASHRAM():
 
 
 def main_BV5_Erase():
-    print ("Erasing...")
-    main_EMS64_PageSwap()
-    dev.write(0x01,[0x0A,0x01,0x06,0x0A,0xAA,0xA9,0x05,0x55,0x56,0x0A,0xAA,0x80,0x0A,0xAA,0xA9,0x05,0x55,0x56,0x0A,0xAA,0x10])
-    RAMbuffer= dev.read(0x81,64)
-    while main_ELCheapo_Read(0)[0]!=0xFF:
+    print('Erasing...')
+    dev.write(1, [10, 0, 6, 10, 170, 169, 5, 85, 86, 10, 170, 128, 10, 170, 169, 5, 85, 86, 10, 170, 16])
+    RAMbuffer = dev.read(129, 64)
+    while main_ELCheapo_Read(0)[0] != 255:
         print(main_ELCheapo_Read(0))
-        pass
-    print ("Erased")
-def main_BV5_EraseSector():
-    print ("Erasing...")
-    main_EMS64_PageSwap()
-    dev.write(0x01,[0x0A,0x01,0x06,0x0A,0xAA,0xA9,0x05,0x55,0x56,0x0A,0xAA,0x80,0x0A,0xAA,0xA9,0x05,0x55,0x56,0x0A,0xAA,0x30])
-    RAMbuffer= dev.read(0x81,64)
-    while main_ELCheapo_Read(0)[0]!=0xFF:
-        print(main_ELCheapo_Read(0))
-        pass
-    print ("Erased")
+
+    print('Erased')
+
 
 def main_BV5_Write():
-    main_EMS64_PageSwap()
     main_LoadROM()
-    print('Writing ROM Data') 
-    main_BV5_EraseSector()
-    main_EMS64_PageSwap()
-    ROMpos=0
-    waitcount=0
-    for BankNumber in range (0,int((ROMsize/16384))):
-        main_ROMBankSwitch(BankNumber) #Set the bank
-        print ( BankNumber*16384, ' of ' ,ROMsize)
-        for ROMAddress in range (0x4000,0x8000,32):
-#            if BankNumber==0:
-#                ROMAddress=ROMAddress-0x4000
-            AddHi=ROMAddress>>8
-            AddLo=ROMAddress&0xFF
-            Data32Bytes=ROMbuffer[ROMpos:ROMpos+32]
-            
-            #byte by byte write, its slow....
+    print('Writing ROM Data')
+    main_BV5_Erase()
+    ROMpos = 0
+    waitcount = 0
+    for BankNumber in range(0, int(ROMsize / 16384)):
+        main_ROMBankSwitch(BankNumber)
+        print(BankNumber * 16384, ' of ', ROMsize)
+        for ROMAddress in range(16384, 32768, 32):
+            AddHi = ROMAddress >> 8
+            AddLo = ROMAddress & 255
+            Data32Bytes = ROMbuffer[ROMpos:ROMpos + 32]
+            AddHi = AddHi.to_bytes(1, 'little')
+            AddLo = AddLo.to_bytes(1, 'little')
+            FlashWriteCommand = b"'\x00" + AddHi + AddLo
+            USBoutputPacket = FlashWriteCommand + Data32Bytes
+            dev.write(1, USBoutputPacket)
+            USBbuffer = dev.read(129, 64)
+            ROMpos += 32
 
-            AddHi=AddHi.to_bytes(1,'little')
-            AddLo=AddLo.to_bytes(1,'little')
-
-            FlashWriteCommand=b'\x29\x01'+AddHi+AddLo
-            USBoutputPacket = FlashWriteCommand+Data32Bytes
-            dev.write(0x01,USBoutputPacket)
-            USBbuffer = dev.read(0x81,64)
-
-            ROMpos+=32
-    app.lowerLeftLabel.set(str(ROMsize)+' Bytes Written' )
-    messagebox.showinfo('Operation Complete','Writing Complete.')
-    #return to read mode - datasheet says write 0xFF to any address
+    app.lowerLeftLabel.set(str(ROMsize) + ' Bytes Written')
+    messagebox.showinfo('Operation Complete', 'Writing Complete.')
     main_ROMBankSwitch(0)
 
 
