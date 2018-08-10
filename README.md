@@ -14,6 +14,27 @@ Custom version of the Joey software.
 ### Compiling
 Run ```python -m py2exe JoeyJoebags.py``` to compile windows binaries
 
+Alternatively you can use this script
+```
+from distutils.core import setup
+import py2exe, sys
+
+sys.argv.append('py2exe')
+
+setup(
+        options = {
+                    'py2exe': {'bundle_files': 2,
+                               'compressed': True
+                              }
+                  },
+        console = [{
+                    'script': "JoeyJoebags.py",
+					'icon_resources': [(0, 'favicon.ico')]
+                  }],
+        zipfile = None,
+)
+```
+
 ### Requirements
 ```
 Python 3.4
